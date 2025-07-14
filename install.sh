@@ -1,5 +1,6 @@
 #!/bin/bash
-# https://github.com/JaKooLit
+# HyprFedora Setup Script
+# Based on JaKooLit's Fedora-Hyprland: https://github.com/JaKooLit/Fedora-Hyprland
 
 clear
 
@@ -45,6 +46,7 @@ clear
 
 printf "\n%.0s" {1..2}  
 echo -e "\e[35m
+        HyprFedora based on
 	╦╔═┌─┐┌─┐╦    ╦ ╦┬ ┬┌─┐┬─┐┬  ┌─┐┌┐┌┌┬┐
 	╠╩╗│ ││ │║    ╠═╣└┬┘├─┘├┬┘│  ├─┤│││ ││ 2025
 	╩ ╩└─┘└─┘╩═╝  ╩ ╩ ┴ ┴  ┴└─┴─┘┴ ┴┘└┘─┴┘ Fedora Linux
@@ -52,9 +54,11 @@ echo -e "\e[35m
 printf "\n%.0s" {1..1} 
 
 # Welcome message using whiptail (for displaying information)
-whiptail --title "KooL Fedora-Hyprland (2025) Install Script" \
-    --msgbox "Welcome to KooL Fedora-Hyprland (2025) Install Script!!!\n\n\
-ATTENTION: Run a full system update and Reboot first !!! (Highly Recommended)\n\n\
+whiptail --title "HyprFedora (2025) Install Script" \
+    --msgbox "Welcome to HyprFedora based on KooL Fedora-Hyprland (2025)!\n\n\
+ATTENTION:\n\
+This script is intended to run on a fresh install of Fedora.\n\
+Run a full system update and Reboot first !!! (Highly Recommended)\n\n\
 NOTE: If you are installing on a VM, ensure to enable 3D acceleration else Hyprland may NOT start!" \
     15 80
 
@@ -67,7 +71,7 @@ if ! whiptail --title "Proceed with Installation?" \
     exit 1
 fi
 
-echo "👌 ${OK} 🇵🇭 ${MAGENTA}KooL..${RESET} ${SKY_BLUE}lets continue with the installation...${RESET}" | tee -a "$LOG"
+echo "👌 ${OK} ${MAGENTA}KooL..${RESET} ${SKY_BLUE}lets continue with the installation...${RESET}" | tee -a "$LOG"
 
 sleep 1
 printf "\n%.0s" {1..1}
@@ -398,7 +402,7 @@ if rpm -q hyprland &> /dev/null || rpm -q hyprland-git &> /dev/null; then
     sleep 2
     printf "\n%.0s" {1..2}
 
-    printf "${SKY_BLUE}Thank you${RESET} 🫰 for using 🇵🇭 ${MAGENTA}KooL's Hyprland Dots${RESET}. ${YELLOW}Enjoy and Have a good day!${RESET}"
+    printf "${SKY_BLUE}Thank you${RESET} 🫰 for using ${MAGENTA}KooL's Hyprland Dots${RESET}. ${YELLOW}Enjoy and Have a good day!${RESET}"
     printf "\n%.0s" {1..2}
 
     printf "\n${NOTE} You can start Hyprland by typing ${SKY_BLUE}Hyprland${RESET} (IF SDDM is not installed) (note the capital H!).\n"
