@@ -36,7 +36,7 @@ fi
 printf "\n%.0s" {1..1}
 
 # Installation of main components
-printf "\n%s - Installing ${SKY_BLUE}KooL's hyprland necessary packages${RESET} .... \n" "${NOTE}"
+printf "\n%s - Installing ${SKY_BLUE}HyprFedora necessary packages${RESET} .... \n" "${NOTE}"
 
 for PKG1 in "${hyprfedora-package[@]}" "${copr_packages[@]}"; do
   install_package "$PKG1" "$LOG"
