@@ -7,6 +7,7 @@ hyprfedora_package=(
   gnome-software
   libreoffice
   chromium
+  brave-browser
 )
 
 copr_packages=(
