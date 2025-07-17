@@ -2,7 +2,7 @@
 # HyprFedora packages
 
 # packages neeeded
-hyprfedora-package=(
+hyprfedora_package=(
   nfs-utils
   gnome-software
   libreoffice
@@ -29,16 +29,33 @@ fi
 # Set the name of the log file to include the current date and time
 LOG="Install-Logs/install-$(date +%d-%H%M%S)_hyprfedora-pkgs.log"
 
-if [ $overall_failed -ne 0 ]; then
-  echo -e "${ERROR} Some packages failed to uninstall. Please check the log."
+printf "\n%.0s" {1..1}
+
+# Ensure dnf-plugins-core is installed 
+if ! rpm -q dnf-plugins-core &>/dev/null; then
+  echo "Installing required package: dnf-plugins-core"
+  install_package dnf-plugins-core "$LOG" || {
+    echo "Failed to install dnf-plugins-core. Cannot proceed with repo configuration."
+    exit 1
+  }
 fi
 
-printf "\n%.0s" {1..1}
+# Check and add Brave browser repo if missing
+brave_repo="/etc/yum.repos.d/brave-browser.repo"
+
+if [[ -f "$brave_repo" ]]; then
+  echo "Brave repo already exists: $brave_repo"
+else
+  echo "Brave repo not found. Adding..."
+  sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo \
+    && echo "Brave repo added successfully." \
+    || echo "Failed to add Brave repo."
+fi
 
 # Installation of main components
 printf "\n%s - Installing ${SKY_BLUE}HyprFedora necessary packages${RESET} .... \n" "${NOTE}"
 
-for PKG1 in "${hyprfedora-package[@]}" "${copr_packages[@]}"; do
+for PKG1 in "${hyprfedora_package[@]}" "${copr_packages[@]}"; do
   install_package "$PKG1" "$LOG"
 done
 
