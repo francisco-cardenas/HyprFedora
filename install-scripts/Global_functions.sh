@@ -69,6 +69,30 @@ install_package() {
   fi
 }
 
+# Funtion to install Flatpak packages
+install_flatpak() {
+  local app_id="$1"
+  local remote="${3:-flathub}"  # Default to flathub unless specified
+
+  if flatpak info "$app_id" &>/dev/null; then
+    echo -e "${INFO} ${MAGENTA}$app_id${RESET} is already installed. Skipping..."
+  else
+    (
+      stdbuf -oL flatpak install -y "$remote" "$app_id" 2>&1
+    ) >> "$LOG" 2>&1 &
+    PID=$!
+    show_progress $PID "$app_id"
+
+    # Verify installation
+    if flatpak info "$app_id" &>/dev/null; then
+      echo -e "${OK} Flatpak ${YELLOW}$app_id${RESET} has been successfully installed!"
+    else
+      echo -e "\n${ERROR} Flatpak ${YELLOW}$app_id${RESET} failed to install. Please check the $LOG. You may need to install manually."
+    fi
+  fi
+}
+
+
 # Function for removing packages
 uninstall_package() {
   local pkg="$1"

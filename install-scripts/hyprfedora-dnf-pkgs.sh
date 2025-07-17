@@ -8,6 +8,8 @@ hyprfedora_package=(
   libreoffice
   chromium
   brave-browser
+  install gnome-software-plugin-flatpak 
+  gnome-software-plugin-rpm-ostree
 )
 
 copr_packages=(
@@ -28,7 +30,7 @@ if ! source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"; then
 fi
 
 # Set the name of the log file to include the current date and time
-LOG="Install-Logs/install-$(date +%d-%H%M%S)_hyprfedora-pkgs.log"
+LOG="Install-Logs/install-$(date +%d-%H%M%S)_hyprfedora-dnf-pkgs.log"
 
 printf "\n%.0s" {1..1}
 
