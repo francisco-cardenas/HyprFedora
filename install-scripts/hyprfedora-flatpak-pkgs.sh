@@ -3,6 +3,7 @@
 # packages neeeded
 flatpak_packages=(
   com.spotify.Client
+  org.standardnotes.standardnotes
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
