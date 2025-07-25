@@ -293,6 +293,16 @@ echo "${INFO} Installing ${SKY_BLUE}Hyprland...${RESET}" | tee -a "$LOG"
 sleep 1
 execute_script "hyprland.sh"
 
+echo "${INFO} Installing ${SKY_BLUE}Docker...${RESET}" | tee -a "$LOG"
+sleep 1
+execute_script "docker.sh"
+
+echo "${INFO} Installing ${SKY_BLUE}HyprFedora specific packages...${RESET}" | tee -a "$LOG"
+sleep 1
+execute_script "hyprfedora-dnf-pkgs.sh"
+execute_script "hyprfedora-flatpak-pkgs.sh"
+execute_script "hyprfedora-webapps.sh"
+
 # Clean up the selected options (remove quotes and trim spaces)
 selected_options=$(echo "$selected_options" | tr -d '"' | tr -s ' ')
 
