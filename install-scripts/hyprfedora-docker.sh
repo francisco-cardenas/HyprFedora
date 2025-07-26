@@ -40,4 +40,13 @@ for PKG1 in "${docker_packages[@]}"; do
   install_package "$PKG1" "$LOG"
 done
 
+# Add user to docker group
+printf "\n%s - Adding user ${YELLOW}$USER${RESET} to ${SKY_BLUE}docker${RESET} group .... \n" "${NOTE}"
+sudo usermod -aG docker "$USER" 2>&1 | tee -a "$LOG"
+if groups "$USER" | grep -qw docker; then
+  echo -e "${OK} ${YELLOW}$USER${RESET} is now a member of the docker group."
+else
+  echo -e "${WARN} Please log out and back in for group changes to take effect."
+fi
+
 printf "\n%.0s" {1..2}
