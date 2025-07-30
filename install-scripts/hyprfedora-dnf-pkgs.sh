@@ -10,6 +10,8 @@ hyprfedora_package=(
   brave-browser
   install gnome-software-plugin-flatpak 
   gnome-software-plugin-rpm-ostree
+  cups
+  hplip
 )
 
 copr_packages=(
