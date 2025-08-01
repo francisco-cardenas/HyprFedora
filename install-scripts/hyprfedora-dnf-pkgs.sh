@@ -57,6 +57,8 @@ else
     || echo "Failed to add Brave repo."
 fi
 
+printf "\n%.0s" {1..1}
+
 # Installation of main components
 printf "\n%s - Installing ${SKY_BLUE}HyprFedora necessary packages${RESET} .... \n" "${NOTE}"
 
