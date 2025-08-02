@@ -388,10 +388,10 @@ for option in "${options[@]}"; do
             execute_script "kool-dotfiles-main.sh"
             ;;
 	git)
-	    execute_script "setup-git.sh" 
+	    execute_script "hyprfedora-setup-git.sh" 
 	    ;;
 	devpod) 
-	    execute_script "setup-devpod.sh"
+	    execute_script "hyprfedora-setup-devpod.sh"
 	    ;;
         *)
             echo "Unknown option: $option" | tee -a "$LOG"
