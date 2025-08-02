@@ -344,8 +344,7 @@ fi
 
 # Ask for dotfiles URL if devpod selected
 if [[ " ${options[*]} " =~ " devpod " ]]; then
-    dotfiles_url=$(whiptail --inputbox "Enter your dotfiles Git repo URL (optional):" 8 60 --title "Dotfiles URL" 3>&1 1>&2 2>
-&3)
+    dotfiles_url=$(whiptail --inputbox "Enter your dotfiles Git repo URL (optional):" 8 60 --title "Dotfiles URL" 3>&1 1>&2 2>&3)
     export dotfiles_url
 fi
 
