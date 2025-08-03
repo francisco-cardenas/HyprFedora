@@ -91,6 +91,16 @@ LOG="$PARENT_DIR/Install-Logs/install-$(date +%d-%H%M%S)_dotfiles.log"
 printf "\n%s - Installing ${SKY_BLUE}HyprFedora necessary packages${RESET} .... \n" "${NOTE}"
 install_package stow "$LOG"
 
+printf "\n%s - ${RESET} Installing ${SKY_BLUE}Cloning repo${RESET} .... \n" "${NOTE}"
+if [ ! -d "$dotfiles_dir" ]; then
+    git clone "$dotfiles_repo" "$dotfiles_dir"
+else
+    echo "Dotfiles directory already exists: $dotfiles_dir"
+fi
+
+# Change the working directory to the dotfiles directory
+cd "$dotfiles_dir" || { echo "${ERROR} Failed to change directory to $dotfiles_dir"; exit 1; }
+
 printf "\n%.0s" {1..1}
 
 # update home directories
