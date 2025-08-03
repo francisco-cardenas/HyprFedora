@@ -419,9 +419,9 @@ for CONFIG in $CONFIGS; do
   
     # Set the new config
     stow_config $CONFIG
-  elif [ "$CONFIG" = "zsh" ] && [ -f "$HOME/$DIR_NAME" ]; then
-    CONFIG_PATH="$HOME/.zshrc"
-    backup_config "$CONFIG" "$CONFIG_PATH"
+  elif [ "$CONFIG" = "zsh" ] && [ -f "$HOME/.zshrc" ]; then
+    # Special handling for .zshrc
+    backup_config "$CONFIG" "$HOME/.zshrc"
 
     # Set the new config
     stow_config $CONFIG
