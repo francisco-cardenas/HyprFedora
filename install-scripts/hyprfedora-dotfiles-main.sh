@@ -408,18 +408,19 @@ stow_config() {
 
 printf "${INFO} - Copying dotfiles. ${SKY_BLUE}Existing configs will be backed up!${RESET}\n"
 # Configs to set
-CONFIGS="ags fastfetch kitty ghostty rofi swaync waybar btop cava hypr Kvantum qt5ct qt6ct swappy wallust wlogout .zsh"
+CONFIGS="ags fastfetch kitty ghostty rofi swaync waybar btop cava hypr Kvantum qt5ct qt6ct swappy wallust wlogout zsh"
 
 for CONFIG in $CONFIGS; do
+  # Backup the existing directory if it exists
+  CONFIG_PATH="$HOME/.config/$CONFIG"
+
   if [ -d "$CONFIG_PATH" ]; then
-    # Backup the existing directory if it exists
-    CONFIG_PATH="$HOME/.config/$CONFIG"
     backup_config "$CONFIG" "$CONFIG_PATH"
   
     # Set the new config
     stow_config $CONFIG
-  elif [ "$CONFIG" = ".zshrc" ] && [ -f "$HOME/$DIR_NAME" ]; then
-    CONFIG_PATH="$HOME/$CONFIG"
+  elif [ "$CONFIG" = "zsh" ] && [ -f "$HOME/$DIR_NAME" ]; then
+    CONFIG_PATH="$HOME/.zshrc"
     backup_config "$CONFIG" "$CONFIG_PATH"
 
     # Set the new config
