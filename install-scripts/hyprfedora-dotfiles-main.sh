@@ -378,101 +378,55 @@ get_backup_dirname() {
   echo "back-up_${timestamp}"
 }
 
-printf "${INFO} - copying dotfiles ${SKY_BLUE}first${RESET} part\n"
-# Config directories which will ask the user whether to replace or not
-DIRS="ags fastfetch kitty ghostty rofi swaync waybar zsh"
+# Function to backup a config
+backup_config() {
+  local CONFIG="$1"
+  local CONFIG_PATH="$2"
 
-for DIR2 in $DIRS; do
-  DIRPATH="$HOME/.config/$DIR2"
-  
-  if [ -d "$DIRPATH" ]; then
-    while true; do
-      printf "\n${INFO} Found ${YELLOW}$DIR2${RESET} config found in ~/.config/\n"
-      echo -n "${CAT} Do you want to replace ${YELLOW}$DIR2${RESET} config? (y/n): "
-      read DIR1_CHOICE
+  echo -e "\n${NOTE} - Config for ${YELLOW}$CONFIG${RESET} found, attempting to back up."
+  BACKUP_DIR=$(get_backup_dirname)
 
-      case "$DIR1_CHOICE" in
-        [Yy]* )
-          BACKUP_DIR=$(get_backup_dirname)
-          # Backup the existing directory
-          mv "$DIRPATH" "$DIRPATH-backup-$BACKUP_DIR" 2>&1 | tee -a "$LOG"
-          echo -e "${NOTE} - Backed up $DIR2 to $DIRPATH-backup-$BACKUP_DIR." 2>&1 | tee -a "$LOG"
-
-          # Set the new config
-          stow -v $DIR2 2>&1 | tee -a "$LOG"
-          echo -e "${OK} - Replaced $DIR2 with new configuration." 2>&1 | tee -a "$LOG"
-         
-          # Restoring rofi themes directory unique themes
-          if [ "$DIR2" = "rofi" ]; then
-            if [ -d "$DIRPATH-backup-$BACKUP_DIR/themes" ]; then
-              for file in "$DIRPATH-backup-$BACKUP_DIR/themes"/*; do
-                [ -e "$file" ] || continue  # Skip if no files are found
-                echo "Copying $file to $HOME/.config/rofi/themes/" >> "$LOG"
-                cp -n "$file" "$HOME/.config/rofi/themes/" >> "$LOG" 2>&1
-              done || true
-            fi
-            
-            # restoring global 0-shared-fonts.rasi
-            if [ -f "$DIRPATH-backup-$BACKUP_DIR/0-shared-fonts.rasi" ]; then
-              echo "Restoring $DIRPATH-backup-$BACKUP_DIR/0-shared-fonts.rasi to $HOME/.config/rofi/" >> "$LOG"
-              cp "$DIRPATH-backup-$BACKUP_DIR/0-shared-fonts.rasi" "$HOME/.config/rofi/0-shared-fonts.rasi" >> "$LOG" 2>&1
-            fi
-
-          fi
-
-          break
-          ;;
-        [Nn]* )
-          echo -e "${NOTE} - Skipping ${YELLOW}$DIR2${RESET}" 2>&1 | tee -a "$LOG"
-          break
-          ;;
-        * )
-          echo -e "${WARN} - Invalid choice. Please enter Y or N."
-          ;;
-      esac
-    done
+  # Backup the existing file or directory
+  mv "$CONFIG_PATH" "$CONFIG_PATH-$BACKUP_DIR" 2>&1 | tee -a "$LOG"
+  if [ $? -eq 0 ]; then
+    echo -e "${NOTE} - Backed up $CONFIG to $CONFIG_PATH-$BACKUP_DIR."
   else
-    # Copy new config if directory does not exist
-    cp -r "config/$DIR2" "$HOME/.config/$DIR2" 2>&1 | tee -a "$LOG"
-    echo -e "${OK} - Copy completed for ${YELLOW}$DIR2${RESET}" 2>&1 | tee -a "$LOG"
+    echo "${ERROR} - Failed to back up $CONFIG."
+    exit 1
   fi
-done
+}
 
-printf "\n%.0s" {1..1}
-
-printf "${INFO} - Copying dotfiles ${SKY_BLUE}second${RESET} part\n"
-
-DIR="btop cava hypr Kvantum qt5ct qt6ct swappy wallust wlogout"
-
-for DIR_NAME in $DIR; do
-  DIRPATH="$HOME/.config/$DIR_NAME"
-  
-  # Backup the existing directory if it exists
-  if [ -d "$DIRPATH" ]; then
-    echo -e "\n${NOTE} - Config for ${YELLOW}$DIR_NAME${RESET} found, attempting to back up."
-    BACKUP_DIR=$(get_backup_dirname)
-    
-    # Backup the existing directory
-    mv "$DIRPATH" "$DIRPATH-backup-$BACKUP_DIR" 2>&1 | tee -a "$LOG"
-    if [ $? -eq 0 ]; then
-      echo -e "${NOTE} - Backed up $DIR_NAME to $DIRPATH-backup-$BACKUP_DIR."
+# Function to stow configs
+stow_config() {
+    local target="$1"
+    if command stow -v "$target" 2>&1 | tee -a "$LOG"; then
+        echo "${OK} Stowed $target successfully." | tee -a "$LOG"
     else
-      echo "${ERROR} - Failed to back up $DIR_NAME."
-      exit 1
+        echo "${ERROR} Failed to stow $target." | tee -a "$LOG"
     fi
-  fi
+}
+
+printf "${INFO} - Copying dotfiles. ${SKY_BLUE}Existing configs will be backed up!${RESET}\n"
+# Configs to set
+CONFIGS="ags fastfetch kitty ghostty rofi swaync waybar btop cava hypr Kvantum qt5ct qt6ct swappy wallust wlogout .zsh"
+
+for CONFIG in $CONFIGS; do
+  if [ -d "$CONFIG_PATH" ]; then
+    # Backup the existing directory if it exists
+    CONFIG_PATH="$HOME/.config/$CONFIG"
+    backup_config "$CONFIG" "$CONFIG_PATH"
   
-  # Set the new config
-  if [ -d "config/$DIR_NAME" ]; then
-    stow -v $DIR_NAME 2>&1 | tee -a "$LOG"
-    if [ $? -eq 0 ]; then
-      echo "${OK} - Copy of config for ${YELLOW}$DIR_NAME${RESET} completed!"
-    else
-      echo "${ERROR} - Failed to copy $DIR_NAME."
-      exit 1
-    fi
+    # Set the new config
+    stow_config $CONFIG
+  elif [ "$CONFIG" = ".zshrc" ] && [ -f "$HOME/$DIR_NAME" ]; then
+    CONFIG_PATH="$HOME/$CONFIG"
+    backup_config "$CONFIG" "$CONFIG_PATH"
+
+    # Set the new config
+    stow_config $CONFIG
   else
-    echo "${ERROR} - Directory config/$DIR_NAME does not exist to copy."
+    # Set the new config without a config to backup
+    stow_config $CONFIG
   fi
 done
 
