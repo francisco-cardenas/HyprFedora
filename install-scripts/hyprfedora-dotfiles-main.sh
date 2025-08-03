@@ -3,7 +3,7 @@
 clear
 dotfiles_repo="https://github.com/francisco-cardenas/HyprFedora-dots.git"
 dotfiles_dir="$HOME/.dotfiles"
-hypr_config="$dotfiles_dir/Hyprland/.config/hypr"
+hypr_config="$dotfiles_dir/hypr/.config/hypr"
 wallpaper=$HOME/.config/hypr/wallpaper_effects/.wallpaper_current
 waybar_style="$HOME/.config/waybar/style/[Retro] Simple Style.css"
 waybar_config="$HOME/.config/waybar/configs/HyprFedora"
