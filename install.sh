@@ -386,12 +386,12 @@ for option in "${options[@]}"; do
             echo "${INFO} Installing pre-configured ${SKY_BLUE}KooL Hyprland dotfiles...${RESET}" | tee -a "$LOG"
             execute_script "kool-dotfiles-main.sh"
             ;;
-	git)
-	    execute_script "hyprfedora-setup-git.sh" 
-	    ;;
-	devpod) 
-	    execute_script "hyprfedora-setup-devpod.sh"
-	    ;;
+	    git)
+	        execute_script "hyprfedora-setup-git.sh" 
+	        ;;
+	    devpod) 
+	        execute_script "hyprfedora-setup-devpod.sh"
+	        ;;
         *)
             echo "Unknown option: $option" | tee -a "$LOG"
             ;;
