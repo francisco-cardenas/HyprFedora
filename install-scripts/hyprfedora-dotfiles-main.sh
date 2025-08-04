@@ -647,10 +647,10 @@ fi
 sddm_sequioa="/usr/share/sddm/themes/sequoia_2"
 sddm_simple2="/usr/share/sddm/themes/simple_sddm_2"
 if [ -d "$sddm_simple2" ]; then
-  sudo cp -r "$wallpaper" "$sddm_simple2/backgrounds/default" || true
+  sudo cp "$source_wallpaper" "$sddm_simple2/Backgrounds/default" || true
   echo "${NOTE} Current wallpaper applied as default SDDM background" 2>&1 | tee -a "$LOG"
 elif [ -d "$sddm_sequioa" ]; then
-  sudo cp -r "$wallpaper" "$sddm_sequioa/backgrounds/default" || true
+  sudo cp "$source_wallpaper" "$sddm_sequioa/backgrounds/default" || true
   echo "${NOTE} Current wallpaper applied as default SDDM background" 2>&1 | tee -a "$LOG"
 fi
 
