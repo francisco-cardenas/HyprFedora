@@ -623,10 +623,13 @@ printf "\n%.0s" {1..1}
 
 # wallpaper stuff
 mkdir -p $HOME/Pictures/wallpapers
+source_wallpaper="default-wallpaper/Pictures/wallpapers/HyprFedora-default.jpg"
+
 if stow -v default-wallpaper; then
-  echo "${OK} ${MAGENTA}default wallpaper ${RESET} copied successfully!" | tee -a "$LOG"
+  cp  "$source_wallpaper" "$wallpaper"
+  echo "${OK} ${MAGENTA}default wallpaper ${RESET} set successfully!" | tee -a "$LOG"
 else
-  echo "${ERROR} Failed to copy ${YELLOW}default wallpaper ${RESET}" | tee -a "$LOG"
+  echo "${ERROR} Failed to set ${YELLOW}default wallpaper ${RESET}" | tee -a "$LOG"
 fi
  
 # Set some files as executable
@@ -640,32 +643,15 @@ if [ ! -e "$HOME/.config/waybar/config" ] || [ -L "$HOME/.config/waybar/config" 
     ln -sf "$waybar_config" "$HOME/.config/waybar/config" 2>&1 | tee -a "$LOG"
 fi
 
-# for SDDM (sequoia_2)
+# SDDM Background
 sddm_sequioa="/usr/share/sddm/themes/sequoia_2"
-if [ -d "$sddm_sequioa" ]; then
-  while true; do
-    echo -n "${CAT} SDDM sequoia_2 theme detected! Apply current wallpaper as SDDM background? (y/n): "
-    read SDDM_WALL
-    
-    # Remove any leading/trailing whitespace or newlines from input
-    SDDM_WALL=$(echo "$SDDM_WALL" | tr -d '\n' | tr -d ' ')
-
-    case $SDDM_WALL in
-      [Yy])
-        # Copy the wallpaper, ignore errors if the file exists or fails
-        sudo cp -r "$hypr_config/wallpaper_effects/.wallpaper_current" "/usr/share/sddm/themes/sequoia_2/backgrounds/default" || true
-        echo "${NOTE} Current wallpaper applied as default SDDM background" 2>&1 | tee -a "$LOG"
-        break
-        ;;
-      [Nn])
-        echo "${NOTE} You chose not to apply the current wallpaper to SDDM." 2>&1 | tee -a "$LOG"
-        break
-        ;;
-      *)
-        echo "Please enter 'y' or 'n' to proceed."
-        ;;
-    esac
-  done
+sddm_simple2="/usr/share/sddm/themes/simple-sddm-2"
+if [ -d "$sddm_simple2" ]; then
+  sudo cp -r "$wallpaper" "$sddm_simple2/backgrounds/default" || true
+  echo "${NOTE} Current wallpaper applied as default SDDM background" 2>&1 | tee -a "$LOG"
+elif [ -d "$sddm_sequioa" ]; then
+  sudo cp -r "$wallpaper" "$sddm_sequioa/backgrounds/default" || true
+  echo "${NOTE} Current wallpaper applied as default SDDM background" 2>&1 | tee -a "$LOG"
 fi
 
 # additional wallpapers
