@@ -302,11 +302,11 @@ if [ "$input_group_detected" == "true" ]; then
     execute_script "InputGroup.sh"
 fi
 
-echo "${INFO} Installing ${SKY_BLUE}AGS v1 for Desktop Overview...${RESET}" | tee -a "$LOG"
-execute_script "ags.sh"
-
 echo "${INFO} Installing ${SKY_BLUE}xdg-desktop-portal-hyprland...${RESET}" | tee -a "$LOG"
 execute_script "xdph.sh"
+
+echo "${INFO} Installing ${SKY_BLUE}quickshell for Desktop Overview...${RESET}" | tee -a "$LOG"
+execute_script "quickshell.sh"
 
 echo "${INFO} Configuring ${SKY_BLUE}Bluetooth...${RESET}" | tee -a "$LOG"
 execute_script "bluetooth.sh"
