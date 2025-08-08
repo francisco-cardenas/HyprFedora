@@ -109,7 +109,7 @@ sddm_theme="ON"
 pokemon="OFF"
 rog="OFF"
 hyprfedora_dots="ON"
-hyprland-dots="OFF"
+hyprland_dots="OFF"
 nvidia="OFF"
 git="ON"
 devpod="ON"
@@ -188,7 +188,7 @@ options_command+=(
     "pokemon" "Add Pokemon color scripts to your terminal?" "OFF"
     "rog" "Are you installing on Asus ROG laptops?" "OFF"
     "hyprfedora_dots" "Download and install pre-configured HyprFedora dots?" "ON"
-    "hyprland-dots" "Download and install pre-configured KooL Hyprland dotfiles?" "OFF"
+    "hyprland_dots" "Download and install pre-configured KooL Hyprland dotfiles?" "OFF"
     "git"    "Configure global Git settings" "ON"
     "devpod" "Install and configure DevPod" "ON"
 )
@@ -224,7 +224,7 @@ while true; do
             "hyprfedora_dots")
                 hyprfedora_selected="ON"
                 ;;
-            "hyprland-dots")
+            "hyprland_dots")
                 hyprland_jakoolit_selected="ON"
                 ;;
         esac
@@ -345,7 +345,7 @@ fi
 
 # Ask for dotfiles URL if devpod selected
 if [[ " ${options[*]} " =~ " devpod " ]]; then
-    dotfiles_url=$(whiptail --inputbox "Enter your dotfiles Git repo URL (optional):" 8 60 --title "Dotfiles URL" 3>&1 1>&2 2>&3)
+    dotfiles_url=$(whiptail --inputbox "Enter your DevPod dotfiles Git repo URL (optional):" 8 60 --title "Dotfiles URL" 3>&1 1>&2 2>&3)
     export dotfiles_url
 fi
 
@@ -383,7 +383,7 @@ for option in "${options[@]}"; do
             echo "${INFO} Installing pre-configured ${SKY_BLUE}HyprFedora dotfiles...${RESET}" | tee -a "$LOG"
             execute_script "hyprfedora-dotfiles-main.sh"
             ;;
-        hyprland-dots)
+        hyprland_dots)
             echo "${INFO} Installing pre-configured ${SKY_BLUE}KooL Hyprland dotfiles...${RESET}" | tee -a "$LOG"
             execute_script "kool-dotfiles-main.sh"
             ;;
