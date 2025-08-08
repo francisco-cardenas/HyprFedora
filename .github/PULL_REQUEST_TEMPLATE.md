@@ -21,19 +21,6 @@ Please put an `x` in the boxes that apply:
 - [ ] **Technical debt** (a code change that does not fix a bug or add a feature but makes something clearer for devs)
 - [ ] **Other** (provide details below)
 
-## Checklist
-
-Please put an `x` in the boxes that apply:
-
-- [ ] I have read the [CONTRIBUTING](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/CONTRIBUTING.md) document.
-- [ ] My code follows the code style of this project.
-- [ ] My commit message follows the [commit guidelines](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/CONTRIBUTING.md#git-commit-messages).
-- [ ] My change requires a change to the documentation.
-- [ ] I want to add something in Fedora-Hyprland wiki.
-- [ ] I have added tests to cover my changes.
-- [ ] I have tested my code locally and it works as expected.
-- [ ] All new and existing tests passed.
-
 ## Screenshots
 
 (if appropriate)

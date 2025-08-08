@@ -1,69 +1,66 @@
-# Contributing to KooL Hyprland Projects
+# Contributing to HyprFedora
 
-Thank you for your interest in contributing to KooL Hyprland Projects! We welcome any contributions, including bug fixes, feature enhancements, documentation improvements, and other general improvements.
+Thank you for your interest in contributing to **HyprFedora**!  
+This project is a fork of [JaKooLit/Fedora-Hyprland](https://github.com/JaKooLit/Fedora-Hyprland) with its own defaults and customizations.  
+Contributions are welcome — whether it’s bug fixes, feature enhancements, documentation improvements, or other changes.
+
+---
 
 ## Getting Started
 
-1. Fork the branch development repository to your GitHub account. This will create a copy of this repository in your account. You can make changes to this copy without affecting the original repository.
-  - For fork this repository, click the **Fork** button in the top right corner of this page or click [here](https://github.com/JaKooLit/Fedora-Hyprland/fork).
-  - Make sure to uncheck the Copy the `main` branch only. This will copy the development branch and other branches (if any)
- 
-2. Clone your forked repository to your local machine.
+1. **Fork this repository** to your GitHub account.
+   - Click the **Fork** button in the top right corner of this page.
+   - This will create a copy of this repository under your account.
 
-  - Use the following command to clone your forked repository to your local machine.
+2. **Clone your fork** to your local machine:
+   ```bash
+   git clone --depth=1 https://github.com/francisco-cardenas/HyprFedora.git
+   cd HyprFedora
+   ```
 
-     ```bash
-     git clone --depth=1 -b development https://github.com/JaKooLit/Fedora-Hyprland.git
-     ```
+3. **Create a new branch** for your work:
+   ```bash
+   git checkout -b your-branch-name
+   ```
 
-3. Create a new branch for your changes.
+4. **Make your changes** and commit them with a descriptive message:
+   ```bash
+   git commit -m "feat: short description of the change"
+   ```
 
-  - For example, to create a new branch named `your-branch-name`, use the following command.
+5. **Push your branch** to your fork:
+   ```bash
+   git push origin your-branch-name
+   ```
 
-     ```bash
-     git checkout -b your-branch-name
-     ```
+6. **Submit a Pull Request** (PR) to this repository’s `main` branch.
+   - Go to your fork on GitHub.
+   - Click **Compare & pull request**.
+   - Add a title and description explaining your changes.
+   - Submit the PR.
 
-4. Make your changes and commit them with a descriptive commit message.
-
-  - For example, to commit your changes, use the following command and make sure to follow the [commit message guidelines](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/COMMIT_MESSAGE_GUIDELINES.md).
-
-     ```bash
-     git commit -m "feat: add a new feature"
-     ```
-
-5. Push your changes to your forked repository.
-
-  - For example, to push your changes to your forked repository, use the following command.
-
-     ```bash
-     git push origin your-branch-name
-     ```
-
-6. Submit a **pull request** to the development branch repository.
-   - For example, to create a pull request, use the following steps.
-     1. Go to your forked repository.
-     2. Click the **Compare & pull request** button next to your `your-branch-name` branch.
-     3. Add a title and description for your pull request.
-     4. Click **Create pull request** and remember to add the relevant labels with using the [pull request template](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/.github/PULL_REQUEST_TEMPLATE.md).
+---
 
 ## Guidelines
 
-- Follow the code style of the project.
-- Update the **documentation** if necessary.
-- Add tests if applicable.
-- Make sure all tests pass or fully tested before submitting your changes.
-- Keep your pull request focused and avoid including unrelated changes.
-- Remember to follow the following files before submitting your changes.
-  - [bug.yml](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/.github/ISSUE_TEMPLATE/bug.yml) - Use this template to create a report to help us improve.
-  - [feature.yml](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/.github/ISSUE_TEMPLATE/feature.yml) - Use this template to suggest a feature for this project.
-  - [documentation-update.yml](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/.github/ISSUE_TEMPLATE/documentation-update.yml) - Use this template to propose a change to the documentation.
-  - [PULL_REQUEST_TEMPLATE.md](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/.github/PULL_REQUEST_TEMPLATE.md) - Use this template to submit a pull request.
-  - [COMMIT_MESSAGE_GUIDELINES.md](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/COMMIT_MESSAGE_GUIDELINES.md) - Read this file to learn about the commit message guidelines.
-  - [CONTRIBUTING.md](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/CONTRIBUTING.md) - Read this file to learn about the contributing guidelines.
-  - [LICENSE](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/LICENSE.md) - Read this file to learn about the license.
-  - [README.md](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/README.md) - Read this file to learn about the project.
+- Keep changes focused — avoid unrelated changes in the same PR.
+- Follow the style and structure used in existing scripts.
+- Test your changes before submitting.
+- If you are modifying install scripts, ensure they still function when run independently from the root directory.
+- Update documentation (README or related files) if your change affects installation or usage.
 
-## Contact
+---
 
-If you have any questions, feel free to contact via [GitHub Discussions](https://github.com/JaKooLit/Fedora-Hyprland/discussions) or [Through Discord Server](https://discord.gg/kool-tech-world)
+## Issues & Discussions
+
+- **For bugs or enhancements specific to HyprFedora**, open an issue in this repository.
+- **For issues related to JaKooLit’s Hyprland dotfiles**, please open them in [JaKooLit/Hyprland-Dots](https://github.com/JaKooLit/Hyprland-Dots).
+
+---
+
+## Credit
+
+HyprFedora is based on [JaKooLit/Fedora-Hyprland](https://github.com/JaKooLit/Fedora-Hyprland).  
+We appreciate the work of JaKooLit and contributors to the original project.
+
+
