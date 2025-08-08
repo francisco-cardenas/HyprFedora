@@ -81,11 +81,6 @@ From this menu, you can:
 
 ---
 
-## 🔹 Uninstallation
-A guided `uninstall.sh` is provided, but use with caution — it may render your system unusable. Restoring from a snapshot is safer.
-
----
-
 ## 🙏 Credits
 - **Hyprland** – [hyprland.org](https://hyprland.org/)
 - **Original Fedora-Hyprland scripts** – [JaKooLit](https://github.com/JaKooLit/Fedora-Hyprland)
