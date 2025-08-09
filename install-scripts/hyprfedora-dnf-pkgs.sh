@@ -11,6 +11,7 @@ hyprfedora_package=(
   cups
   hplip
   papirus-icon-theme
+  yubikey-manager
 )
 
 copr_packages=(
