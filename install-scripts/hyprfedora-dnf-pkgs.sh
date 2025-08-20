@@ -12,6 +12,7 @@ hyprfedora_package=(
   hplip
   papirus-icon-theme
   yubikey-manager
+  neovim
   vim
 )
 
